@@ -66,10 +66,10 @@ export const strategiDanKebijakan = {
 
 export const letakGeografis = {
   astronomis: '109°14\'47" BT (Bujur Timur) dan 07°06\'16" LS (Lintang Selatan)',
-  batasUtara: "Desa Warungpring, Kec. Warungpring",
-  batasSelatan: "Desa Moga, Kec. Moga",
-  batasTimur: "Desa Wangkelang, Kec. Moga",
-  batasBarat: "Desa Gendowang, Kec. Moga",
+  batasUtara: "Desa Peredan, Kec. Moga",
+  batasSelatan: "Desa Moga",
+  batasTimur: "Desa Warungpring",
+  batasBarat: "Desa Gendoang",
   luasWilayah: "121,271 Ha",
   tanahSawah: "49,50 Ha (Tanah sawah pertanian)",
   tanahDarat: "71,771 Ha (Tanah pemukiman & darat)",

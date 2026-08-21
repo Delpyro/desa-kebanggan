@@ -3,14 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, Trees } from "lucide-react";
+import { Menu, Trees, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-} from "@/components/ui/sheet";
 
 const navLinks = [
   { href: "/", label: "Beranda" },
@@ -26,88 +21,101 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-all duration-300">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
-        {/* Brand logo & emblem */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm shadow-primary/20 transition-transform duration-300 group-hover:scale-105">
-            <Trees className="h-5 w-5" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-base tracking-tight leading-tight group-hover:text-primary transition-colors">
-              Desa Kebanggan
-            </span>
-            <span className="text-[10px] uppercase font-semibold tracking-wider text-muted-foreground">
-              Kec. Moga · Pemalang
-            </span>
-          </div>
-        </Link>
+    <header className="sticky top-0 z-50 w-full nav-glass">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="flex h-16 items-center justify-between gap-8">
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1 bg-secondary/50 p-1.5 rounded-full border border-border/50">
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/60"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm shadow-primary/20 transition-transform duration-200 group-hover:scale-105">
+              <Trees className="h-5 w-5" />
+            </div>
+            <div className="hidden sm:flex flex-col leading-tight">
+              <span className="font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-200">
+                Desa Kebanggan
+              </span>
+              <span className="text-[10px] text-muted-foreground font-medium tracking-wide">
+                Kec. Moga · Kab. Pemalang
+              </span>
+            </div>
+          </Link>
 
-        {/* Mobile menu trigger */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden rounded-xl hover:bg-secondary"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Buka menu</span>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-0.5 flex-1 justify-center">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                    isActive
+                      ? "text-primary bg-accent"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* CTA + Mobile */}
+          <div className="flex items-center gap-3 shrink-0">
+            <Button asChild size="sm" className="hidden md:inline-flex rounded-lg font-semibold text-sm px-4 shadow-sm shadow-primary/20">
+              <Link href="/kontak">Hubungi Kami</Link>
             </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] sm:w-[320px] p-6">
-            <SheetTitle className="flex items-center gap-2 text-left font-bold text-lg">
-              <Trees className="h-5 w-5 text-primary" />
-              Desa Kebanggan
-            </SheetTitle>
-            <nav className="flex flex-col gap-2 mt-8">
-              {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      isActive
-                        ? "bg-primary text-primary-foreground font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </SheetContent>
-        </Sheet>
+
+            {/* Mobile trigger */}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden rounded-lg">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72 p-0">
+                <div className="flex items-center justify-between p-5 border-b border-border">
+                  <SheetTitle className="flex items-center gap-2 font-bold text-base">
+                    <Trees className="h-5 w-5 text-primary" />
+                    Desa Kebanggan
+                  </SheetTitle>
+                </div>
+                <nav className="flex flex-col p-4 gap-1">
+                  {navLinks.map((link) => {
+                    const isActive =
+                      link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                          isActive
+                            ? "bg-accent text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                  <div className="pt-3 mt-2 border-t border-border">
+                    <Button asChild className="w-full rounded-xl font-semibold" onClick={() => setOpen(false)}>
+                      <Link href="/kontak">Hubungi Kami</Link>
+                    </Button>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+
+        </div>
       </div>
     </header>
   );
-}
+}
