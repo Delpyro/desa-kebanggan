@@ -16,6 +16,8 @@ import {
   TrendingUp,
   Sprout,
   ShieldAlert,
+  ImageIcon,
+  PlayCircle,
 } from "lucide-react";
 import {
   sejarahDesa,
@@ -85,23 +87,44 @@ export const metadata: Metadata = {
 
 export default function ProfilPage() {
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-12 space-y-12 max-w-6xl">
-      {/* Header section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/10 via-secondary to-background border border-primary/20 p-8 sm:p-10 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-4">
-          <Landmark className="h-3.5 w-3.5" />
-          Monografi Resmi Desa Kebanggan Tahun 2025
+    <div className="bg-background min-h-screen">
+
+      {/* ── Page Hero Header ─────────────────────────────── */}
+      <div className="relative w-full h-64 sm:h-80 lg:h-[420px] bg-muted overflow-hidden">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent z-10" />
+        {/* Image placeholder icon */}
+        <div className="absolute inset-0 flex items-center justify-center z-5">
+          <div className="flex flex-col items-center gap-3 text-foreground/20">
+            <ImageIcon className="h-16 w-16" />
+            <p className="text-sm font-medium">Foto Balai Desa Kebanggan</p>
+          </div>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-          Profil & Gambaran Umum Desa
-        </h1>
-        <p className="text-muted-foreground mt-2 max-w-3xl text-sm sm:text-base leading-relaxed">
-          Menyajikan data resmi Monografi Desa Kebanggan 2025, arah pembangunan RPJM Desa 2019–2025, letak astronomis, demografi penduduk, mata pencaharian, serta statistik pendidikan.
-        </p>
+        {/* Text overlay on image */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 p-8 sm:p-12">
+          <div className="container mx-auto max-w-6xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider mb-3">
+              <Landmark className="h-3 w-3" />
+              Monografi Resmi Tahun 2025
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Profil & Gambaran Umum
+              <br />Desa Kebanggan
+            </h1>
+          </div>
+        </div>
       </div>
 
+      {/* ── Page Content ─────────────────────────────────── */}
+      <div className="container mx-auto px-4 sm:px-6 py-12 space-y-10 max-w-6xl">
+
+        {/* Subtitle */}
+        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-3xl">
+          Menyajikan data resmi Monografi Desa Kebanggan 2025 — letak geografis, demografi penduduk, mata pencaharian, serta struktur pemerintahan desa.
+        </p>
+
       <Tabs defaultValue="visi-misi" className="w-full space-y-8">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 p-1.5 bg-secondary/70 rounded-2xl border border-border/50 h-auto gap-1">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 p-1 bg-muted/50 rounded-2xl border border-border/50 h-auto gap-1">
           <TabsTrigger
             value="visi-misi"
             className="rounded-xl py-2.5 text-xs sm:text-sm font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm transition-all"
@@ -293,6 +316,17 @@ export default function ProfilPage() {
                 </div>
               </div>
 
+              {/* ── Placeholder Peta / Foto Wilayah Desa ── */}
+              <div className="relative w-full h-48 rounded-2xl overflow-hidden border border-border/50 bg-muted flex flex-col items-center justify-center gap-2 text-muted-foreground">
+                <MapPin className="h-8 w-8 text-muted-foreground/50" />
+                <div className="text-center px-6">
+                  <p className="text-sm font-semibold text-foreground/70">
+                    Peta Wilayah / Foto Udara Desa Kebanggan
+                  </p>
+                  <p className="text-xs mt-1">Ganti dengan foto udara atau peta administrasi desa</p>
+                </div>
+              </div>
+
               <Separator />
 
               <div className="grid gap-4 sm:grid-cols-3">
@@ -472,6 +506,18 @@ export default function ProfilPage() {
           </div>
 
           {/* Bagan Organisasi */}
+
+          {/* ── Placeholder Foto / Scan SK Pengangkatan ── */}
+          <div className="relative w-full h-40 rounded-2xl overflow-hidden border border-border/50 bg-muted flex flex-col items-center justify-center gap-2 text-muted-foreground">
+            <ImageIcon className="h-8 w-8 text-muted-foreground/50" />
+            <div className="text-center px-6">
+              <p className="text-sm font-semibold text-foreground/70">
+                Foto Bersama / Dokumentasi Perangkat Desa Kebanggan
+              </p>
+              <p className="text-xs mt-1">Ganti dengan foto tim perangkat desa</p>
+            </div>
+          </div>
+
           <div className="flex flex-col items-center gap-0">
 
             {/* Level 1 – Kepala Desa */}
@@ -511,6 +557,6 @@ export default function ProfilPage() {
         </TabsContent>
       </Tabs>
     </div>
+    </div>
   );
 }
-

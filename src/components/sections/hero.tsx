@@ -1,73 +1,77 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MapPin, ArrowRight, Building2, Sparkles } from "lucide-react";
+import { ArrowRight, MapPin, ImageIcon } from "lucide-react";
 import { desaProfile } from "@/data/profil";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/40 bg-gradient-to-b from-primary/10 via-background to-background py-20 md:py-32">
-      {/* Decorative ambient glow Orbs */}
-      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/15 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[300px] h-[250px] bg-accent/20 blur-[100px] rounded-full pointer-events-none" />
+    <section className="bg-background py-16 md:py-24">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-      {/* Batik subtle background texture */}
-      <div className="absolute inset-0 batik-texture opacity-30 pointer-events-none" />
+          {/* ── Left: Text Content ── */}
+          <div className="space-y-8 max-w-xl">
+            {/* Location badge */}
+            <div className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-3.5 py-1.5 rounded-full text-xs font-semibold">
+              <MapPin className="h-3.5 w-3.5 text-primary" />
+              Kec. {desaProfile.kecamatan}, Kab. {desaProfile.kabupaten}
+            </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 text-center max-w-4xl">
-        {/* Location pill badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-primary/20 text-xs font-semibold text-primary mb-6 shadow-xs backdrop-blur-xs animate-fade-in">
-          <MapPin className="h-3.5 w-3.5 text-accent shrink-0" />
-          <span>
-            Kecamatan {desaProfile.kecamatan}, Kabupaten {desaProfile.kabupaten}
-          </span>
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-        </div>
+            {/* Heading */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.1]">
+                Portal Resmi
+                <br />
+                <span className="text-primary">Desa Kebanggan</span>
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {desaProfile.sambutan}
+              </p>
+            </div>
 
-        {/* Hero title */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.15]">
-          Selamat Datang di Portal Resmi{" "}
-          <span className="font-display italic text-gradient block sm:inline">
-            {desaProfile.nama}
-          </span>
-        </h1>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="rounded-xl font-semibold px-7 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/25 transition-shadow">
+                <Link href="/profil">
+                  Profil Desa
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-xl font-semibold px-7 border-border/60 hover:bg-secondary">
+                <Link href="/bumdes">BUMDes GJ</Link>
+              </Button>
+            </div>
 
-        {/* Subtitle / Sambutan */}
-        <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          {desaProfile.sambutan}
-        </p>
+            {/* Mini stats row */}
+            <div className="flex items-center gap-6 pt-2 border-t border-border/50">
+              {desaProfile.statistik.slice(0, 3).map((stat, i) => (
+                <div key={i}>
+                  <p className="text-xl font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground font-medium">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Call to Action buttons */}
-        <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-          <Button
-            asChild
-            size="lg"
-            className="w-full sm:w-auto font-semibold px-7 rounded-xl shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
-          >
-            <Link href="/profil" className="flex items-center gap-2">
-              <span>Jelajahi Profil Desa</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+          {/* ── Right: Image Placeholder ── */}
+          <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden bg-muted border border-border/50 shadow-xl shadow-foreground/5">
+            {/* Inner gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/8 via-transparent to-accent/30" />
 
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto font-semibold px-7 rounded-xl border-primary/30 hover:bg-secondary/70 transition-all duration-300"
-          >
-            <Link href="/bumdes" className="flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-primary" />
-              <span>Unit BUMDes GJ</span>
-            </Link>
-          </Button>
-        </div>
+            {/* Centered placeholder icon */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+              <div className="h-20 w-20 rounded-2xl bg-background/80 shadow-sm border border-border/50 flex items-center justify-center backdrop-blur-sm">
+                <ImageIcon className="h-9 w-9 text-muted-foreground" />
+              </div>
+              <div className="text-center px-8">
+                <p className="font-semibold text-foreground/80 text-sm">Foto Desa Kebanggan</p>
+                <p className="text-xs text-muted-foreground mt-1">Panorama · Balai Desa · Potensi Alam</p>
+              </div>
+            </div>
+          </div>
 
-        {/* Quick tagline pill */}
-        <div className="mt-12 inline-flex items-center gap-2 text-xs text-muted-foreground/80 bg-background/60 px-4 py-2 rounded-full border border-border/40 backdrop-blur-xs">
-          <Sparkles className="h-3.5 w-3.5 text-accent" />
-          <span>Informasi Transparan, Pelayanan Cepat & Berkemajuan</span>
         </div>
       </div>
     </section>
   );
-}
+}

@@ -12,20 +12,25 @@ export default function PrestasiPage() {
   const sortedPrestasi = [...prestasiList].sort((a, b) => b.tahun - a.tahun);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-12 space-y-12 max-w-6xl">
-      {/* Header section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-500/10 via-secondary to-background border border-amber-500/20 p-8 sm:p-10 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider mb-4">
-          <Trophy className="h-3.5 w-3.5" />
-          Penghargaan & Capaian
+    <div className="bg-background min-h-screen pb-20">
+      
+      {/* ── Page Header ─────────────────────────────── */}
+      <div className="bg-amber-50/50 dark:bg-amber-950/20 border-b border-amber-200/50 dark:border-amber-900/50 py-16 sm:py-20">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <Trophy className="h-4 w-4" />
+            Penghargaan & Capaian
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
+            Prestasi Desa
+          </h1>
+          <p className="text-muted-foreground mt-4 max-w-2xl text-base sm:text-lg leading-relaxed">
+            Kumpulan penghargaan dan pencapaian yang berhasil diraih Desa Kebanggan sebagai wujud dedikasi pemerintah desa dan masyarakat.
+          </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-          Prestasi Desa Kebanggan
-        </h1>
-        <p className="text-muted-foreground mt-2 max-w-2xl text-sm sm:text-base leading-relaxed">
-          Berbagai penghargaan dan pencapaian yang berhasil diraih Desa Kebanggan sebagai wujud kerja keras pemerintah desa dan partisipasi aktif masyarakat.
-        </p>
       </div>
+
+      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-6xl">
 
       {sortedPrestasi.length === 0 ? (
         <div className="text-center py-16 rounded-2xl border border-dashed border-border/60 bg-secondary/30">
@@ -39,6 +44,7 @@ export default function PrestasiPage() {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

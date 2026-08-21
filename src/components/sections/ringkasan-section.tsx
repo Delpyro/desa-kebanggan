@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, LucideIcon } from "lucide-react";
+import { ArrowRight, LucideIcon, ImageIcon } from "lucide-react";
 
 interface RingkasanSectionProps {
   icon: LucideIcon;
@@ -8,6 +8,7 @@ interface RingkasanSectionProps {
   description: string;
   href: string;
   linkLabel: string;
+  imagePlaceholder?: string;
 }
 
 export function RingkasanSection({
@@ -16,36 +17,46 @@ export function RingkasanSection({
   description,
   href,
   linkLabel,
+  imagePlaceholder,
 }: RingkasanSectionProps) {
   return (
-    <div className="group relative rounded-2xl border border-border/60 bg-card p-7 flex flex-col h-full shadow-xs hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 transition-all duration-300 overflow-hidden">
-      {/* Decorative hover gradient border glow */}
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary/80 via-accent to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="group flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-primary/30 hover:shadow-lg hover:shadow-foreground/5 transition-all duration-300">
 
-      <div className="rounded-2xl bg-secondary p-3.5 w-fit mb-5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-105">
-        <Icon className="h-6 w-6" />
+      {/* Image placeholder — tall and clean */}
+      <div className="relative w-full h-52 bg-muted overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/20" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+          <div className="h-14 w-14 rounded-2xl bg-background/70 backdrop-blur-sm border border-border/50 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+            <ImageIcon className="h-6 w-6 text-muted-foreground" />
+          </div>
+          <p className="text-xs font-medium text-foreground/60 text-center px-6 leading-snug">
+            {imagePlaceholder ?? `Foto ${title}`}
+          </p>
+        </div>
       </div>
 
-      <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-        {title}
-      </h3>
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-6">
+        <div className="flex items-start gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-accent flex items-center justify-center text-primary shrink-0 mt-0.5">
+            <Icon className="h-5 w-5" />
+          </div>
+          <h3 className="text-lg font-bold text-foreground leading-snug pt-1">{title}</h3>
+        </div>
 
-      <p className="text-sm text-muted-foreground mt-2.5 flex-1 leading-relaxed">
-        {description}
-      </p>
+        <p className="text-sm text-muted-foreground leading-relaxed flex-1">{description}</p>
 
-      <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between">
-        <Button
-          asChild
-          variant="ghost"
-          className="px-0 text-xs font-semibold tracking-wide uppercase text-primary hover:bg-transparent hover:text-accent group/btn"
-        >
-          <Link href={href} className="inline-flex items-center gap-1.5">
-            <span>{linkLabel}</span>
-            <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+        <div className="mt-5 pt-4 border-t border-border/40">
+          <Link
+            href={href}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all duration-200"
+          >
+            {linkLabel}
+            <ArrowRight className="h-4 w-4" />
           </Link>
-        </Button>
+        </div>
       </div>
+
     </div>
   );
-}
+}
